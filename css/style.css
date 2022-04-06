@@ -54,6 +54,9 @@ body {
 .escondido {
     display: none;
 }
+.hidden {
+    display: none;
+}
 
 
 @media (max-width: 335px) {
