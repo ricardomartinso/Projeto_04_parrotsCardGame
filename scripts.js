@@ -27,10 +27,11 @@ pickCards();
 function virarCarta(carta) {
 
         let cartasArray = document.querySelectorAll(".virar-carta-back");
+        let viradas = document.querySelectorAll(".viradas");
         let parrotCardFront = carta.children[0];
         let parrotCardBack = carta.children[1];
 
-        if (cartasViradas.length < 2 && carta.contains("virada")) {
+        if (cartasViradas.length < 2 && carta.c) {
 
         parrotCardBack.classList.add("virar-carta-back");
         cartasViradas.push(carta);
