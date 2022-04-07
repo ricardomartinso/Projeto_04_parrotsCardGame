@@ -3,44 +3,65 @@ let parrotCardFront;
 let parrotCardBack;
 let cartasViradas = [];
 let compararGif;
-let numeroCartas;
 let cartas = document.querySelectorAll(".parrot-card");
+let gifsArray = ["./images/bobrossparrot.gif",
+"./images/bobrossparrot.gif",
+"./images/explodyparrot.gif",
+"./images/explodyparrot.gif",
+"./images/fiestaparrot.gif",
+"./images/fiestaparrot.gif",
+"./images/metalparrot.gif",
+"./images/metalparrot.gif",
+"./images/revertitparrot.gif",
+"./images/revertitparrot.gif",
+"./images/tripletsparrot.gif",
+"./images/tripletsparrot.gif",
+"./images/unicornparrot.gif",
+"./images/unicornparrot.gif"
+];
 
-embaralharCartas();
+pickCards();
+
 
 
 function virarCarta(carta) {
-        console.log(carta)
+
+        let cartasArray = document.querySelectorAll(".virar-carta-back");
         let parrotCardFront = carta.children[0];
         let parrotCardBack = carta.children[1];
-        
-        console.log(carta.children[1]);
-        if (parrotCardBack !== undefined && cartasViradas.length < 2) {
-        cartasViradas.push(carta);
-        parrotCardFront.classList.add("escondido");
-        parrotCardBack.classList.remove("escondido");
-        parrotCardBack.classList.add("selecionada");
-        
-    } 
-    compararCartasIguais()
-    compararCartasDiferentes()
-}
 
-function compararCartasIguais() {
-    compararGif = document.querySelectorAll(".parrot-card-back.selecionada");
-    let contador = 0;
-    if (compararGif[0].attributes.src.value === compararGif[1].attributes.src.value) {
-        
-        while (contador < 2) {
-        compararGif[contador].classList.add("carta-igual");
-        compararGif[contador].classList.remove("selecionada");
-        contador++;
+        if (cartasViradas.length < 2 && carta.contains("virada")) {
+
+        parrotCardBack.classList.add("virar-carta-back");
+        cartasViradas.push(carta);
+        console.log(cartasViradas.length)
+    }
+    compararCartas();
+}
+// cartasArray[0].querySelector("img").attributes.src.value
+function compararCartas() {
+    let cartasArray = document.querySelectorAll(".virar-carta-back");
+    
+    if (cartasArray[0].querySelector("img").attributes.src.value === cartasArray[1].querySelector("img").attributes.src.value) {
+
+        for (let i = 0; i < 2; i++) {
+            cartasArray[i].classList.add("carta-igual");
+            cartasArray[i].parentNode.classList.remove("virada");
+        }
+
+    } 
+    
+    else if (cartasArray[0].querySelector("img").attributes.src.value !== cartasArray[1].querySelector("img").attributes.src.value) {
+        for (let i = 0; i < 2; i++) {
+            cartasArray[i].classList.remove("virar-carta-back");
+            cartasArray[i].parentNode.classList.remove("selecionada");
+        }
     }
         cartasViradas = [];
-    }
-
 }
-function compararCartasDiferentes() {
+
+ 
+/*function compararCartasDiferentes() {
     compararGif = document.querySelectorAll(".parrot-card-back.selecionada");
 
     if (compararGif[0].attributes.src.value !== compararGif[1].attributes.src.value) {
@@ -53,26 +74,35 @@ function compararCartasDiferentes() {
         cartasViradas = [];
     }
 }
+*/
 
-function embaralharCartas() {
+function pickCards() {
+    let lista = document.querySelector(".parrot-cards");
+    
+    let perguntaCartas = prompt("Quantas cartas quer jogar?");
+    let gifs = document.querySelector(".parrot-card-back img");
+    let arrayTeste = [];
 
-    cartas = document.querySelectorAll(".parrot-card");
-    
-    numeroCartas = prompt("Quantas cartas quer jogar?")
-    
-    let contador = 0;
-    if (numeroCartas % 2 == 0 && numeroCartas >= 4 && numeroCartas <= 14) {
-        
-        while (contador < (cartas.length - numeroCartas)) {
-        cartas[contador].classList.add("hidden");
-        contador++
-    }
+    if (perguntaCartas % 2 == 0 && perguntaCartas >= 4 && perguntaCartas <= 14) {
+    for (let i = 0; i < perguntaCartas; i++) {
+        let templateArray = `<div class="parrot-card virada" onclick="virarCarta(this)">
+        <div class="parrot-card-front face"><img src="./images/front.png"></div>
+        <div class="parrot-card-back face"><img src="${gifsArray[i]}"></div>
+</div>`
+        arrayTeste.push(templateArray);
+        }
+
     } else {
-        embaralharCartas();
+        pickCards();
     }
-    cartas.sort(comparador);
-}
 
+    arrayTeste.sort(comparador); // embaralhou o array
+
+    for (let i = 0; i < perguntaCartas; i++) {
+        lista.innerHTML += arrayTeste[i];
+        }
+
+}
 function comparador() {
     return Math.random() - 0.5;
 }

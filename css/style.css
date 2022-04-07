@@ -30,6 +30,20 @@ body {
     margin-top: 50px;
     flex-wrap: wrap;
 }
+.face {
+    width: 100%;
+    height: 100%;
+    background-color: #A7E9AF;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px rgba(0,0,0,.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    backface-visibility: hidden;
+    transition: all 1s;
+    transform-style: preserve-3d;
+  }
 
 .parrot-card {
     display: flex;
@@ -40,16 +54,22 @@ body {
     border-radius: 5px;
     width: 117px;
     height: 146px;
+    position: relative;
+
 }
 
 .parrot-card img {
     width: 100px;
     height: 100px;
 }
-
 .parrot-card-back {
-    display: flex;
-
+    transform: rotateY(180deg);
+}
+.virar-carta-back {
+    transform: rotateY(0deg);
+}
+.virar-carta-front{
+    transform: rotateY(-180deg);
 }
 .escondido {
     display: none;
