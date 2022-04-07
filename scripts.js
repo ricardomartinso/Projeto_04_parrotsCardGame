@@ -31,7 +31,7 @@ function virarCarta(carta) {
         let parrotCardFront = carta.children[0];
         let parrotCardBack = carta.children[1];
 
-        if (cartasViradas.length < 2 && carta.c) {
+        if (cartasViradas.length < 2) {
 
         parrotCardBack.classList.add("virar-carta-back");
         cartasViradas.push(carta);
