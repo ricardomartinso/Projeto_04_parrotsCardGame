@@ -85,8 +85,9 @@ function esperarCarta() {
 
 function pickCards() {
     let lista = document.querySelector(".parrot-cards");
-    
+    perguntaCartas = 0;
     perguntaCartas = prompt("Quantas cartas quer jogar?");
+    console.log(perguntaCartas);
     let gifs = document.querySelector(".parrot-card-back img");
     arrayTeste = [];
 
@@ -97,17 +98,16 @@ function pickCards() {
         <div class="parrot-card-back face"><img src="${gifsArray[i]}"></div>
 </div>`
         arrayTeste.push(templateArray);
+        lista.innerHTML += arrayTeste[i];
         }
 
     } else {
+        
         pickCards();
     }
 
     arrayTeste.sort(comparador); // embaralhou o array
 
-    for (let i = 0; i < perguntaCartas; i++) {
-        lista.innerHTML += arrayTeste[i];
-        }
 
 }
 function comparador() {
