@@ -55,25 +55,15 @@ function compararCartas() {
 
     if (arrayTeste[0].querySelector("img").attributes.src.value === arrayTeste[1].querySelector("img").attributes.src.value) {
 
-        for (let i = 0; i < 2; i++) {
-            cartasArray[i].classList.add("carta-igual");
-            cartasArray[i].classList.remove("virar-carta-back");
-            cartasArray[i].classList.remove("face");
-            cartasArray[i].previousElementSibling.classList.add("hidden");
-            cartasArray[i].parentNode.classList.remove("virada");
-            cartasArray[i].parentNode.classList.add("certas");
-        }
-        arrayTeste.pop();
-        arrayTeste.pop();
-        gameOver();
+        setTimeout(esperarCartaIgual, 500);
     } 
     else if (arrayTeste[0].querySelector("img").attributes.src.value !== arrayTeste[1].querySelector("img").attributes.src.value) {
-        setTimeout(esperarCarta, 1000);
+        setTimeout(esperarCartaDiferente, 1000);
     }
     cartasViradas = [];
     
 }
-function esperarCarta() {
+function esperarCartaDiferente() {
         cartasArray = document.querySelectorAll(".virar-carta-back");
         arrayTeste = Array.from(cartasArray);
         for (let i = 0; i < 2; i++) {
@@ -81,6 +71,19 @@ function esperarCarta() {
     }
     arrayTeste.pop();
     arrayTeste.pop();
+}
+function esperarCartaIgual() {
+    for (let i = 0; i < 2; i++) {
+        cartasArray[i].classList.add("carta-igual");
+        cartasArray[i].classList.remove("virar-carta-back");
+        cartasArray[i].classList.remove("face");
+        cartasArray[i].previousElementSibling.classList.add("hidden");
+        cartasArray[i].parentNode.classList.remove("virada");
+        cartasArray[i].parentNode.classList.add("certas");
+    }
+    arrayTeste.pop();
+    arrayTeste.pop();
+    gameOver();
 }
 
 function pickCards() {
