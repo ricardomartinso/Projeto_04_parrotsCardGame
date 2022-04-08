@@ -92,23 +92,22 @@ function pickCards() {
     arrayTeste = [];
 
     if (perguntaCartas % 2 == 0 && perguntaCartas >= 4 && perguntaCartas <= 14) {
-    for (let i = 0; i < perguntaCartas; i++) {
-        let templateArray = `<div class="parrot-card virada" onclick="virarCarta(this)">
+        for (let i = 0; i < perguntaCartas; i++) {
+            let templateArray = `<div class="parrot-card virada" onclick="virarCarta(this)">
         <div class="parrot-card-front face"><img src="./images/front.png"></div>
         <div class="parrot-card-back face"><img src="${gifsArray[i]}"></div>
 </div>`
-        arrayTeste.push(templateArray);
-        lista.innerHTML += arrayTeste[i];
+            arrayTeste.push(templateArray);
         }
-
-    } else {
-        
-        pickCards();
-    }
-
-    arrayTeste.sort(comparador); // embaralhou o array
-
-
+            arrayTeste.sort(comparador); // embaralhou o array
+            for (let index = 0; index < perguntaCartas; index++) {
+            lista.innerHTML += arrayTeste[index];
+    } 
+}
+        else {
+            pickCards();
+    } 
+    
 }
 function comparador() {
     return Math.random() - 0.5;
