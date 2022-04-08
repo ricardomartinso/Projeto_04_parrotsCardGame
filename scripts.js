@@ -32,21 +32,20 @@ function virarCarta(carta) {
         rodadas.push(carta);
         cartasArray = document.querySelectorAll(".virar-carta-back"); //todas as cartas que foram viradas
 
-        console.log(carta)
         arrayTeste = Array.from(cartasArray);
         let parrotCardFront = carta.children[0]; //div parte frontal da carta
         let parrotCardBack = carta.children[1]; //div parte traseira da carta
 
 
 
-        if (cartasViradas.length < 2) {
+        if (cartasViradas.length < 2 && cartasViradas[0] !== carta) {
         parrotCardBack.classList.add("virar-carta-back"); //Efeito de virar a carta e mostrar a parte traseira
         cartasViradas.push(carta); // PUSH para aumentar tamanho do length para só permitir virar até 2 cartas por vez
-        
-    }
-    compararCartas();
+        }
+        if (cartasViradas.length === 2) {
+            compararCartas();
+        }
     
-
 }
 
 function compararCartas() {
@@ -58,7 +57,7 @@ function compararCartas() {
 
         for (let i = 0; i < 2; i++) {
             cartasArray[i].classList.add("carta-igual");
-            cartasArray[i].classList.add("virar-carta-back");
+            cartasArray[i].classList.remove("virar-carta-back");
             cartasArray[i].classList.remove("face");
             cartasArray[i].previousElementSibling.classList.add("hidden");
             cartasArray[i].parentNode.classList.remove("virada");
@@ -73,7 +72,6 @@ function compararCartas() {
     }
     cartasViradas = [];
     
-
 }
 function esperarCarta() {
         cartasArray = document.querySelectorAll(".virar-carta-back");
