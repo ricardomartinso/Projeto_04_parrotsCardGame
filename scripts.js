@@ -83,7 +83,7 @@ function esperarCartaIgual() {
     }
     arrayTeste.pop();
     arrayTeste.pop();
-    gameOver();
+    setTimeout(gameOver, 150)
 }
 
 function pickCards() {
@@ -115,6 +115,8 @@ function pickCards() {
 function comparador() {
     return Math.random() - 0.5;
 }
+
+
 function gameOver() {
     if (document.querySelectorAll(".parrot-card.certas").length === parseInt(perguntaCartas)) {
         alert(`Você ganhou em ${rodadas.length} rodadas`);
