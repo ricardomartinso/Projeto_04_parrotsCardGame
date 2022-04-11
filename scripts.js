@@ -25,6 +25,7 @@ let rodadas = [];
 let viradas = document.querySelectorAll(".virada");
 let perguntaCartas;
 let timer = 0;
+let temporizadorVar;
 
 pickCards(); // Prompt Qtde Cartas + Random das cartas 
 
@@ -100,7 +101,7 @@ function pickCards() {
     console.log(perguntaCartas);
     let gifs = document.querySelector(".parrot-card-back img");
     arrayTeste = [];
-    setInterval(temporizador(), 1000);
+    temporizadorVar = setInterval(temporizador, 1000);
     
 
     if (perguntaCartas % 2 == 0 && perguntaCartas >= 4 && perguntaCartas <= 14) {
@@ -126,13 +127,15 @@ function comparador() {
 }
 
 function gameOver() {
+    
     if (document.querySelectorAll(".parrot-card.certas").length === parseInt(perguntaCartas)) {
-        alert(`Você ganhou em ${rodadas.length} rodadas`);
-    }
+        clearInterval(temporizadorVar);
+        alert(`Você ganhou com ${rodadas.length} rodadas e ${timer} segundos`);
+    }  
 }
 
 function temporizador() {
+    let timerDiv = document.querySelector(".timer");
     timer++;
-    console.log(timer);
-    timer.innerHTML += `${timer} segundos`
+    timerDiv.innerHTML = `${timer} segundos`
 }
