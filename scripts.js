@@ -24,6 +24,7 @@ let gifsArray = ["./images/bobrossparrot.gif",
 let rodadas = [];
 let viradas = document.querySelectorAll(".virada");
 let perguntaCartas;
+let timer = 0;
 
 pickCards(); // Prompt Qtde Cartas + Random das cartas 
 
@@ -37,11 +38,13 @@ function virarCarta(carta) {
         let parrotCardBack = carta.children[1]; //div parte traseira da carta
 
 
-
+        
         if (cartasViradas.length < 2 && cartasViradas[0] !== carta) {
-        parrotCardBack.classList.add("virar-carta-back"); //Efeito de virar a carta e mostrar a parte traseira
-        cartasViradas.push(carta); // PUSH para aumentar tamanho do length para só permitir virar até 2 cartas por vez
+        parrotCardBack.classList.add("virar-carta-back");//Efeito de virar a carta e mostrar a parte traseira
+        parrotCardFront.classList.add("virar-carta-front");
+         cartasViradas.push(carta);// PUSH para aumentar tamanho do length para só permitir virar até 2 cartas por vez
         }
+        
         if (cartasViradas.length === 2) {
             compararCartas();
         }
@@ -51,6 +54,7 @@ function virarCarta(carta) {
 function compararCartas() {
     
     cartasArray = document.querySelectorAll(".virar-carta-back");
+    cartaFront = document.querySelectorAll(".virar-carta-front");
     arrayTeste = Array.from(cartasArray);
 
     if (arrayTeste[0].querySelector("img").attributes.src.value === arrayTeste[1].querySelector("img").attributes.src.value) {
@@ -60,14 +64,16 @@ function compararCartas() {
     else if (arrayTeste[0].querySelector("img").attributes.src.value !== arrayTeste[1].querySelector("img").attributes.src.value) {
         setTimeout(esperarCartaDiferente, 1000);
     }
-    cartasViradas = [];
-    
+    cartasViradas = [];  
 }
 function esperarCartaDiferente() {
         cartasArray = document.querySelectorAll(".virar-carta-back");
+        cartaFront = document.querySelectorAll(".virar-carta-front");
         arrayTeste = Array.from(cartasArray);
         for (let i = 0; i < 2; i++) {
         cartasArray[i].classList.remove("virar-carta-back");
+        cartaFront[i].classList.remove("virar-carta-front");
+        
     }
     arrayTeste.pop();
     arrayTeste.pop();
@@ -76,6 +82,7 @@ function esperarCartaIgual() {
     for (let i = 0; i < 2; i++) {
         cartasArray[i].classList.add("carta-igual");
         cartasArray[i].classList.remove("virar-carta-back");
+        cartaFront[i].classList.remove("virar-carta-front");
         cartasArray[i].classList.remove("face");
         cartasArray[i].previousElementSibling.classList.add("hidden");
         cartasArray[i].parentNode.classList.remove("virada");
@@ -89,10 +96,12 @@ function esperarCartaIgual() {
 function pickCards() {
     let lista = document.querySelector(".parrot-cards");
     perguntaCartas = 0;
-    perguntaCartas = prompt("Quantas cartas quer jogar?");
+    perguntaCartas = prompt("Quantas cartas quer jogar? (permitido apenas 4 - 14)");
     console.log(perguntaCartas);
     let gifs = document.querySelector(".parrot-card-back img");
     arrayTeste = [];
+    setInterval(temporizador(), 1000);
+    
 
     if (perguntaCartas % 2 == 0 && perguntaCartas >= 4 && perguntaCartas <= 14) {
         for (let i = 0; i < perguntaCartas; i++) {
@@ -116,9 +125,14 @@ function comparador() {
     return Math.random() - 0.5;
 }
 
-
 function gameOver() {
     if (document.querySelectorAll(".parrot-card.certas").length === parseInt(perguntaCartas)) {
         alert(`Você ganhou em ${rodadas.length} rodadas`);
     }
+}
+
+function temporizador() {
+    timer++;
+    console.log(timer);
+    timer.innerHTML += `${timer} segundos`
 }
