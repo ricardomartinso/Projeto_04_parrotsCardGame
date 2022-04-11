@@ -27,7 +27,7 @@ let perguntaCartas;
 let timer = 0;
 let temporizadorVar;
 
-pickCards(); // Prompt Qtde Cartas + Random das cartas 
+pickCards(); // Prompt Qtde Cartas + Random das cartas + contador
 
 
 function virarCarta(carta) {
@@ -40,7 +40,7 @@ function virarCarta(carta) {
 
 
         
-        if (cartasViradas.length < 2 && cartasViradas[0] !== carta) {
+        if (cartasViradas.length < 2 && cartasViradas[0] !== carta && carta.classList.contains("certas") === false) {
         parrotCardBack.classList.add("virar-carta-back");//Efeito de virar a carta e mostrar a parte traseira
         parrotCardFront.classList.add("virar-carta-front");
          cartasViradas.push(carta);// PUSH para aumentar tamanho do length para só permitir virar até 2 cartas por vez
@@ -71,10 +71,10 @@ function esperarCartaDiferente() {
         cartasArray = document.querySelectorAll(".virar-carta-back");
         cartaFront = document.querySelectorAll(".virar-carta-front");
         arrayTeste = Array.from(cartasArray);
+        
         for (let i = 0; i < 2; i++) {
         cartasArray[i].classList.remove("virar-carta-back");
-        cartaFront[i].classList.remove("virar-carta-front");
-        
+        cartaFront[i].classList.remove("virar-carta-front");  
     }
     arrayTeste.pop();
     arrayTeste.pop();
@@ -83,9 +83,7 @@ function esperarCartaIgual() {
     for (let i = 0; i < 2; i++) {
         cartasArray[i].classList.add("carta-igual");
         cartasArray[i].classList.remove("virar-carta-back");
-        cartaFront[i].classList.remove("virar-carta-front");
         cartasArray[i].classList.remove("face");
-        cartasArray[i].previousElementSibling.classList.add("hidden");
         cartasArray[i].parentNode.classList.remove("virada");
         cartasArray[i].parentNode.classList.add("certas");
     }
