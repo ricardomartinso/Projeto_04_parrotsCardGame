@@ -92,7 +92,8 @@ body {
     align-items: center;
     text-align: center;
     width: 100px;
-    height: 30px;
+    height: 40px;
+    padding: 5px;
 
     color: whitesmoke;
     border: none;

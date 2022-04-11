@@ -31,7 +31,7 @@ pickCards(); // Prompt Qtde Cartas + Random das cartas + contador
 
 
 function virarCarta(carta) {
-        rodadas.push(carta);
+        
         cartasArray = document.querySelectorAll(".virar-carta-back"); //todas as cartas que foram viradas
 
         arrayTeste = Array.from(cartasArray);
@@ -41,6 +41,7 @@ function virarCarta(carta) {
 
         
         if (cartasViradas.length < 2 && cartasViradas[0] !== carta && carta.classList.contains("certas") === false) {
+        rodadas.push(carta);
         parrotCardBack.classList.add("virar-carta-back");//Efeito de virar a carta e mostrar a parte traseira
         parrotCardFront.classList.add("virar-carta-front");
          cartasViradas.push(carta);// PUSH para aumentar tamanho do length para só permitir virar até 2 cartas por vez
