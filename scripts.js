@@ -101,10 +101,11 @@ function pickCards() {
     console.log(perguntaCartas);
     let gifs = document.querySelector(".parrot-card-back img");
     arrayTeste = [];
-    temporizadorVar = setInterval(temporizador, 1000);
+    
     
 
     if (perguntaCartas % 2 == 0 && perguntaCartas >= 4 && perguntaCartas <= 14) {
+        temporizadorVar = setInterval(temporizador, 1000);
         for (let i = 0; i < perguntaCartas; i++) {
             let templateArray = `<div class="parrot-card virada" onclick="virarCarta(this)">
         <div class="parrot-card-front face"><img src="./images/front.png"></div>
@@ -118,7 +119,9 @@ function pickCards() {
     } 
 }
         else {
+            temporizadorVar = 0;
             pickCards();
+            
     } 
     
 }
